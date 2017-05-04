@@ -1,0 +1,11 @@
+program sd   
+procedure f(integer x,y;var integer z);
+    begin
+	z:=x+y+z;
+	write(x);
+	write(y);
+	write(z)
+    end
+begin
+return
+end. 

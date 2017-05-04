@@ -1,0 +1,3 @@
+*.exe
+Compiler/bin
+Compiler/obj
