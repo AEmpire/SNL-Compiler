@@ -38,7 +38,7 @@ namespace Compiler.Parser
         {
             TreeNode root = null ;
             TokenList = SNLScanner.getTokenList(filePath) ;
-            if (SNLScanner.error.isError == true)
+            if (SNLScanner.isError == true)
             {
                 error.isError = true;
                 return root;
@@ -84,6 +84,7 @@ namespace Compiler.Parser
                 error.Type = ErrorType.errorType.SyntaxError;
                 error.Line = TokenList[cur].Line;
                 error.Row = TokenList[cur].Row;
+                error.output();
                 return null;
             }
             else
@@ -92,15 +93,30 @@ namespace Compiler.Parser
                 {
                     if (SNLProduct.product[choose][i].IsTerminal)
                     {
-                        TreeNode leaf = new TreeNode();
-                        leaf.IsTerminal = true;
-                        leaf.father = root;
-                        leaf.Terminal = TokenList[cur].lexType;
-                        leaf.Data = TokenList[cur].Data;
-                        leaf.Line = TokenList[cur].Line;
-                        leaf.Row  = TokenList[cur].Row;
-                        root.childs.Add(leaf); 
-                        cur ++ ;
+
+                        if (SNLProduct.product[choose][i].Terminal == TokenList[cur].lexType)
+                        {
+                            TreeNode leaf = new TreeNode();
+                            leaf.IsTerminal = true;
+                            leaf.father = root;
+                            leaf.Terminal = TokenList[cur].lexType;
+                            leaf.Data = TokenList[cur].Data;
+                            leaf.Line = TokenList[cur].Line;
+                            leaf.Row = TokenList[cur].Row;
+                            root.childs.Add(leaf);
+                            cur++;
+                        }
+                        else
+                        {
+                            error.isError = true;
+                            error.Type = ErrorType.errorType.SyntaxError;
+                            error.Line = TokenList[cur].Line;
+                            error.Row = TokenList[cur].Row;
+                            error.output();
+                            cur++;
+                            return null;
+                        }
+                        
                     }
                     else
                     {

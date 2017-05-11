@@ -16,7 +16,7 @@ namespace Compiler.Scanner
         public int       Cur    { get; set; }  //当前字符
         public ErrorType error  { get; set; }  //报错错误对象声明
         public String    Buffer { get; set; }
-
+        public bool      isError { get; set; }
         public scanner()
         {
             Line = 1;
@@ -200,7 +200,7 @@ namespace Compiler.Scanner
             error.Row  = Row;
             error.Type = ErrorType.errorType.LexicalError;
             error.isError = true;
-            return LexType.ENDFILE;
+            return LexType.ERROR;
         }
         
 
@@ -232,19 +232,25 @@ namespace Compiler.Scanner
                 Token.Data = ":=" ;
                 Token.lexType = LexType.ASSIGN;
             }
-            else if (entrance == '.' && Cur < Buffer.Length - 1 )
+            else if (entrance == '.' && Cur < Buffer.Length - 1)
             {
-                if (Buffer[Cur + 1] == '.' ) 
+                if (Buffer[Cur + 1] == '.')
                 {
-                    Cur += 2; Row += 2;
+                    Cur += 2;
+                    Row += 2;
                     Token.Data = "..";
                     Token.lexType = LexType.UNDERANGE;
+                }
+                else
+                {
+                    Token.lexType = recoSymbol(entrance);
+                    Cur++;
+                    Row++;
                 }
             }
             else
             {
-
-                Token.lexType = recoSymbol( entrance );
+                Token.lexType = recoSymbol(entrance);
                 if (Token.lexType != LexType.ENDFILE) Token.Data = "" + Buffer[Cur];
                 Cur++;
                 Row++;
@@ -265,11 +271,15 @@ namespace Compiler.Scanner
             while (true)
             {
                 word = getNextToken();
-                if (error.isError) break;
+                if (error.isError)
+                {
+                    isError = error.isError;
+                    error.output();
+                }
+                error.isError = false;
                 tokenList.Add(word);
                 if (word.lexType == LexType.ENDFILE) break;
             }
-            if (error.isError) error.output();
             return tokenList;
         }
 

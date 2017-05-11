@@ -27,7 +27,8 @@ namespace Compiler.Common
         ASSIGN,      EQ,            LT,             PLUS,        MINUS,  
         TIMES,       OVER,          LPAREN,         RPAREN,      DOT,  
         COLON,       SEMI,          COMMA,          LMIDPAREN,   RMIDPAREN,  
-        UNDERANGE 
+        UNDERANGE,   
+        
     };
 
     /*非终极符*/

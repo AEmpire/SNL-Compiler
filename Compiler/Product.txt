@@ -82,8 +82,7 @@ ProcDec = PROCEDURE ProcName LPAREN ParamList RPAREN SEMI ProcDecPart ProcBody P
 
 ProcDecMore =
 
-ProcDecMore = ProcDeclaration
-
+ProcDecMore = ProcDec
 ProcName = ID
 
 ParamList = 

@@ -13,5 +13,7 @@ namespace Compiler.Scanner
         public int Row { get; set; }
         public LexType lexType { get; set; }
         public string Data { get; set; }
+
+
     }
 }

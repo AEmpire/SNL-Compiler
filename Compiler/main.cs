@@ -17,35 +17,42 @@ namespace Compiler
             parser Parser = new parser();
 
             TreeNode root = Parser.getTree( "../../source.txt" );
-            Console.WriteLine( "EROOR? " + Parser.error.isError );
             Parser.DislayTokenList();
-            //Display( root );
+            Display( root );
             Console.ReadKey();
             
         }
         static public void Display(TreeNode root)
         {
-            Console.Write( root.NonTerminal + ":  " );
-            for (int i = 0; i < root.ChildNum; i++)
+       
+            if (root != null)
             {
-                try
+                Console.WriteLine(root.NonTerminal + ":  ");
+                for (int i = 0; i < root.ChildNum; i++)
                 {
-                    if (root.childs[i].IsTerminal) Console.Write(root.childs[i].Terminal + "    ");
-                    else Console.Write(root.childs[i].NonTerminal + " ");
+                    try
+                    {
+                        if (root.childs[i].IsTerminal) Console.WriteLine(root.childs[i].Data + "    ");
+                    }
+                    catch (NullReferenceException)
+                    {
+                        Console.WriteLine("");
+                        return;
+                        ;
+                    }
+
                 }
-                catch (NullReferenceException)
+                for (int i = 0; i < root.ChildNum; i++)
                 {
-                    Console.WriteLine(" ");
-                    return;
-                    ;
+                    if (root.childs[i].IsTerminal == false) Display(root.childs[i]);
                 }
-            
             }
-            Console.WriteLine( "" );
-            for (int i = 0; i < root.ChildNum; i++)
+            else
             {
-                if (root.childs[i].IsTerminal == false) Display( root.childs[i] );
+                Console.WriteLine("请先修改词法错误");
             }
+          
+          
         }
     }
 }
