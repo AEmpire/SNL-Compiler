@@ -3,9 +3,9 @@ Compiler
 
 SNL Compiler
 ========
-This is a SNL Compiler for JLU Course Design. Symmetic and Syntex only
-
+JLU Course Design
 ========
-TODO
-
--GUI
+Syntex&Symmetic analysis by given Product&Predict
+Output:
+TokenList
+Syntex tree
