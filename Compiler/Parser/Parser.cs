@@ -29,9 +29,15 @@ namespace Compiler.Parser
 
         public void DislayTokenList()
         {
+            string line = "行";
+            string token = "token";
+            string data = "数据";
+            Console.WriteLine("词法分析完成，输出Token表:");
+            Console.WriteLine();
+            Console.WriteLine("{0,-2}|{1,-10}|{2,-8}|", line, token, data);
             for (int i = 0; i < TokenList.Count; i++)
             {
-                Console.WriteLine((TokenList[i].Line+"       "+TokenList[i].lexType+"       "+TokenList[i].Data));
+                Console.WriteLine("{0,-3}|{1,-10}|{2,-10}|",TokenList[i].Line,TokenList[i].lexType,TokenList[i].Data);
             }
         }
         public TreeNode getTree(String filePath)

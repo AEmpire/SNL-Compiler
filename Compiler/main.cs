@@ -15,9 +15,12 @@ namespace Compiler
         static void Main(string[] args)
         {
             parser Parser = new parser();
-
+            
             TreeNode root = Parser.getTree( "../../source.txt" );
+            Console.ReadKey();
             Parser.DislayTokenList();
+            Console.ReadKey();
+            Console.WriteLine("\n语法分析完成，输出语法分析树:\n");
             Display( root );
             Console.ReadKey();
             
@@ -32,7 +35,7 @@ namespace Compiler
                 {
                     try
                     {
-                        if (root.childs[i].IsTerminal) Console.WriteLine(root.childs[i].Data + "    ");
+                        if (root.childs[i].IsTerminal) Console.WriteLine("{0}\n",root.childs[i].Data );
                     }
                     catch (NullReferenceException)
                     {
