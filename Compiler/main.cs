@@ -15,8 +15,9 @@ namespace Compiler
         static void Main(string[] args)
         {
             parser Parser = new parser();
-            
-            TreeNode root = Parser.getTree( "../../source.txt" );
+            Console.WriteLine("请输入文件路径：");
+            string path = Console.ReadLine();
+            TreeNode root = Parser.getTree( path);
             Console.ReadKey();
             Parser.DislayTokenList();
             Console.ReadKey();

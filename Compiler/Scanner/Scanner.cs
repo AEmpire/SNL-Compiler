@@ -37,9 +37,9 @@ namespace Compiler.Scanner
                 {
                     Row ++;
                     //windows下换行不仅仅只有\n,还有\r
-                    if (Buffer[Cur] == '\n' || Buffer[Cur] == '\r')
+                    if (Buffer[Cur] == '\n' )
                     {
-                        Row = 1;
+                        Row = 0;
                         Line ++;
                     }
                     if (Buffer[Cur] == '\t') Row += 3;
@@ -61,7 +61,7 @@ namespace Compiler.Scanner
             //忽略空格，换行符，回车符
             if (Buffer[Cur] == ' ' || Buffer[Cur] == '\n' || Buffer[Cur] == '\r' || Buffer[Cur] == '\t' )
             {
-                while (true)
+                while (Cur<Buffer.Length)
                 {
                     if (Buffer[Cur] == '\r' || Buffer[Cur] == ' ') Row++;
                     else if (Buffer[Cur] == '\n')
